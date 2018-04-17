@@ -31,6 +31,7 @@ services:
       - redis
       - xcache
       - mongo
+    command: ["sh", "-c", "composer require --no-update mongofill/mongofill:dev-master && ./vendor/bin/phpunit"]
 # composer require --no-update mongofill/mongofill
 
   memcached:

@@ -1,4 +1,4 @@
-FROM php:7.0-alpine
+FROM php:7.2-alpine
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
