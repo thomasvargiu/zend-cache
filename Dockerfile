@@ -26,6 +26,8 @@ RUN apk add --no-cache libmemcached-dev zlib-dev cyrus-sasl-dev
 RUN pecl install -o memcached-3.0.4 && docker-php-ext-enable memcached
 RUN pecl install -o mongodb-1.4.2 && docker-php-ext-enable mongodb
 
+RUN echo "apc.enable_cli = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
+
 RUN chmod go+x $(php -r "echo ini_get('extension_dir');")/*
 
 RUN set -o pipefail && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
