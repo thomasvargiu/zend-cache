@@ -1,0 +1,47 @@
+version: "3.4"
+
+services:
+  php:
+    build: .
+    environment:
+      - TESTS_ZEND_CACHE_APC_ENABLED=false
+      - TESTS_ZEND_CACHE_APCU_ENABLED=true
+      - TESTS_ZEND_CACHE_FILESYSTEM_DIR=/dev/shm
+      - TESTS_ZEND_CACHE_MEMCACHED_ENABLED=true
+      - TESTS_ZEND_CACHE_MEMCACHED_HOST=memcached
+      - TESTS_ZEND_CACHE_MEMCACHED_PORT=11211
+      - TESTS_ZEND_CACHE_MEMCACHE_ENABLED=false
+      - TESTS_ZEND_CACHE_MEMCACHE_HOST=memcached
+      - TESTS_ZEND_CACHE_MEMCACHE_PORT=11211
+      - TESTS_ZEND_CACHE_MONGODB_ENABLED=true
+      - TESTS_ZEND_CACHE_REDIS_ENABLED=true
+      - TESTS_ZEND_CACHE_REDIS_HOST=redis
+      - TESTS_ZEND_CACHE_REDIS_PORT=6379
+      - TESTS_ZEND_CACHE_REDIS_PASSWORD=""
+      - TESTS_ZEND_CACHE_REDIS_DATABASE=0
+      - TESTS_ZEND_CACHE_XCACHE_ENABLED=false
+      - TESTS_ZEND_CACHE_XCACHE_ADMIN_AUTH=true
+      - TESTS_ZEND_CACHE_XCACHE_ADMIN_USER=travis
+      - TESTS_ZEND_CACHE_XCACHE_ADMIN_PASS=test
+      - TESTS_ZEND_CACHE_MONGODB_CONNECTSTRING=mongodb://mongo:27017
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - memcached
+      - redis
+      - xcache
+      - mongo
+    command: ["sh", "-c", "composer require --no-update mongofill/mongofill:dev-master && ./vendor/bin/phpunit"]
+# composer require --no-update mongofill/mongofill
+
+  memcached:
+    image: memcached:1-alpine
+
+  redis:
+    image: redis:4-alpine
+
+  xcache:
+    image: slateci/xcache
+
+  mongo:
+    image: mongo:3.6
