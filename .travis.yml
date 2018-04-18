@@ -79,8 +79,8 @@ matrix:
     - php: 7.1
       env:
         - DEPS=lowest
-        - APCU_PECL_VERSION="apcu-5.1.2"
-        - APCU_BC_PECL_VERSION="apcu_bc-1.0.0"
+        - APCU_PECL_VERSION="apcu-5.1.6"
+        - APCU_BC_PECL_VERSION="apcu_bc-1.0.2"
         - TESTS_ZEND_CACHE_MONGODB_USE_POLYFILL=true
     - php: 7.1
       env:
@@ -100,8 +100,8 @@ matrix:
     - php: 7.2
       env:
         - DEPS=lowest
-        - APCU_PECL_VERSION="apcu-5.1.2"
-        - APCU_BC_PECL_VERSION="apcu_bc-1.0.0"
+        - APCU_PECL_VERSION="apcu-5.1.6"
+        - APCU_BC_PECL_VERSION="apcu_bc-1.0.2"
         - TESTS_ZEND_CACHE_MONGODB_USE_POLYFILL=true
     - php: 7.2
       env:
